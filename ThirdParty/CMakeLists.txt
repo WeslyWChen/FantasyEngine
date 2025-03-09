@@ -1,3 +1,7 @@
 add_subdirectory(entt)
+add_subdirectory(gflags)
+add_subdirectory(glad)
+add_subdirectory(glfw)
+add_subdirectory(glm)
 add_subdirectory(glog)
 add_subdirectory(googletest)

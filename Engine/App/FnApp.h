@@ -6,6 +6,7 @@
 #define FNAPP_H
 
 #include <memory>
+#include <string>
 
 #include "FnAppApi.h"
 

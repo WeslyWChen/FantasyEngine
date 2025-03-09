@@ -7,3 +7,12 @@
 [submodule "ThirdParty/glog"]
 	path = ThirdParty/glog
 	url = https://github.com/google/glog.git
+[submodule "ThirdParty/glfw"]
+	path = ThirdParty/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "ThirdParty/glm"]
+	path = ThirdParty/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "ThirdParty/gflags"]
+	path = ThirdParty/gflags
+	url = https://github.com/gflags/gflags.git

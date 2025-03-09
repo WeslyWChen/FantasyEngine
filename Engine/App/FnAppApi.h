@@ -15,4 +15,4 @@
 #define FNAPP_API
 #endif
 
-#endif //FNAPPAPI_H
+#endif  // FNAPPAPI_H
