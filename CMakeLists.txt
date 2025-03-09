@@ -13,5 +13,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out/bin)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/ThirdParty)
 
+add_subdirectory(Engine)
 add_subdirectory(Example)
 add_subdirectory(ThirdParty)
