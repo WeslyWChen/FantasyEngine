@@ -1,0 +1,3 @@
+add_subdirectory(GlRender)
+add_subdirectory(RenderDef)
+add_subdirectory(RenderMgr)
