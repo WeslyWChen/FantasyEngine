@@ -4,17 +4,9 @@
 
 #include "FnRenderMgr.h"
 
-#include "FnModuleMgr.h"
 #include "FnWindowImpl.h"
 
 using namespace std;
-
-std::shared_ptr<FnRenderMgr> FnRenderMgr::Instance()
-{
-    struct FnRenderMgrImpl : FnRenderMgr {};
-    static auto instance = make_shared<FnRenderMgrImpl>();
-    return instance;
-}
 
 void FnRenderMgr::init() {}
 

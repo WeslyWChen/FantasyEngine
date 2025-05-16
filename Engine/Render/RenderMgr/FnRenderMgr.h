@@ -8,12 +8,13 @@
 #include <memory>
 
 #include "FnModule.h"
+#include "FnModuleMgr.h"
 #include "FnRenderMgrApi.h"
 #include "FnWindow.h"
 
 class FNRENDERMGR_API FnRenderMgr : public FnModule {
 public:
-    static std::shared_ptr<FnRenderMgr> Instance();
+    DEFINE_MODULE_INSTANCE(FnRenderMgr);
 
 private:
     FnRenderMgr() = default;
