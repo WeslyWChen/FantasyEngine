@@ -65,41 +65,6 @@ namespace FnMatrixUtil
     }
 }  // namespace FnMatrixUtil
 
-constexpr FnMatrix FnMatrix::MakeIdentity()
-{
-    return FnMatrix {};
-}
-
-constexpr FnMatrix FnMatrix::Make(float m00,
-                                  float m01,
-                                  float m02,
-                                  float m03,
-                                  float m10,
-                                  float m11,
-                                  float m12,
-                                  float m13,
-                                  float m20,
-                                  float m21,
-                                  float m22,
-                                  float m23,
-                                  float m30,
-                                  float m31,
-                                  float m32,
-                                  float m33)
-{
-    return FnMatrix::Make(std::array {m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33});
-}
-
-constexpr FnMatrix FnMatrix::Make(const std::array<float, 16>& mat)
-{
-    return FnMatrix {mat};
-}
-
-constexpr FnMatrix FnMatrix::Make(const FnVector4& v0, const FnVector4& v1, const FnVector4& v2, const FnVector4& v3)
-{
-    return Make(std::array {v0.x, v0.y, v0.z, v0.w, v1.x, v1.y, v1.z, v1.w, v2.x, v2.y, v2.z, v2.w, v3.x, v3.y, v3.z, v3.w});
-}
-
 FnMatrix FnMatrix::MakeScale(float scale)
 {
     FnMatrix mat;
@@ -121,6 +86,11 @@ FnMatrix FnMatrix::MakeTranslate(float x, float y, float z)
     return mat;
 }
 
+FnMatrix FnMatrix::MakeTranslate(int x, int y, int z)
+{
+    return MakeTranslate(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
+}
+
 FnMatrix FnMatrix::MakeTranslate(const FnVector3& pt)
 {
     return MakeTranslate(pt.x, pt.y, pt.z);
@@ -139,19 +109,49 @@ FnMatrix FnMatrix::MakeLookAt(const FnVector3& eye, const FnVector3& center, con
     return FnMatrixUtil::convert(glmMat);
 }
 
-constexpr FnMatrix::FnMatrix()
-{
-    mat = {1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f};
-}
-
-constexpr FnMatrix::FnMatrix(const std::array<float, 16>& mat)
-{
-    this->mat = mat;
-}
-
 bool FnMatrix::isFinite() const
 {
     return std::all_of(mat.begin(), mat.end(), [](float val) { return std::isfinite(val); });
+}
+
+float FnMatrix::getTranslateX() const
+{
+    return mat[3];
+}
+
+float FnMatrix::getTranslateY() const
+{
+    return mat[7];
+}
+
+float FnMatrix::getTranslateZ() const
+{
+    return mat[11];
+}
+
+float FnMatrix::getTranslateW() const
+{
+    return mat[15];
+}
+
+float FnMatrix::getScaleX() const
+{
+    return mat[0];
+}
+
+float FnMatrix::getScaleY() const
+{
+    return mat[5];
+}
+
+float FnMatrix::getScaleZ() const
+{
+    return mat[10];
+}
+
+float FnMatrix::getScaleW() const
+{
+    return mat[15];
 }
 
 std::optional<FnMatrix> FnMatrix::invMatrix() const
