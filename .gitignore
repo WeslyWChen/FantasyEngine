@@ -1,8 +1,6 @@
-# ide
-/.vs
-/.vscode
-/.idea
+# cache
+/.*
 
 # output
 /out
-/cmake-build-debug
+/cmake-build-*
