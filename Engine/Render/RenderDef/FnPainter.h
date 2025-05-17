@@ -5,9 +5,11 @@
 #ifndef FNPAINTER_H
 #define FNPAINTER_H
 
+#include "FnColor.h"
+
 struct FnPainter {
     virtual ~FnPainter() = default;
-    virtual void clear() = 0;
+    virtual void clear(FnColor color) = 0;
 };
 
 #endif  // FNPAINTER_H

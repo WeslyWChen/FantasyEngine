@@ -17,7 +17,7 @@ public:
     FnGlRender& operator==(FnGlRender&&) = delete;
 
 public:
-    void clear() override;
+    void clear(FnColor color) override;
 
 public:
 };

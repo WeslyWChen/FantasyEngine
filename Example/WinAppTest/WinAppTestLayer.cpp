@@ -11,5 +11,5 @@ void WinAppTestLayer::draw(std::shared_ptr<FnPainter> painter)
     if (!painter)
         return;
 
-    painter->clear();
+    painter->clear(FnColorMakeRGB(114, 5, 14));
 }
