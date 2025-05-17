@@ -4,12 +4,26 @@
 
 #include "FnOpenGlRenderer.h"
 
+#include "FnGlRender.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
 using namespace std;
 
-void FnOpenGlRenderer::init() {}
+struct FnOpenGlRenderer::Impl {
+    shared_ptr<FnGlRender> mRenderer = make_shared<FnGlRender>();
+    std::vector<std::weak_ptr<FnRenderObject>> mObjects {};
+};
+
+void FnOpenGlRenderer::init()
+{
+    mImpl = make_shared<FnOpenGlRenderer::Impl>();
+}
+
+void FnOpenGlRenderer::unInit()
+{
+    mImpl = nullptr;
+}
 
 void FnOpenGlRenderer::run()
 {
@@ -37,6 +51,10 @@ void FnOpenGlRenderer::run()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
         // input handle
+        inputHandle();
+
+        // draw handle
+        drawHandle();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -46,4 +64,31 @@ void FnOpenGlRenderer::run()
     glfwTerminate();
 }
 
-void FnOpenGlRenderer::unInit() {}
+void FnOpenGlRenderer::addObject(std::shared_ptr<FnRenderObject> object)
+{
+    if (!mImpl)
+        return;
+    if (!object)
+        return;
+
+    mImpl->mObjects.push_back(object);
+}
+
+void FnOpenGlRenderer::inputHandle() {}
+
+void FnOpenGlRenderer::drawHandle()
+{
+    if (!mImpl)
+        return;
+
+    auto objIt = mImpl->mObjects.begin();
+    while (objIt != mImpl->mObjects.end()) {
+        auto obj = objIt->lock();
+        if (!obj) {
+            objIt = mImpl->mObjects.erase(objIt);
+        } else {
+            obj->draw(mImpl->mRenderer);
+            ++objIt;
+        }
+    }
+}

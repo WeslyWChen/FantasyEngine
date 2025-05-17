@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <string>
 
+#include "FnWindowLayer.h"
+
 enum class FnWindowType : std::uint8_t {
     WINDOW_TYPE_WIN32,
     WINDOW_TYPE_GLFW,
@@ -22,8 +24,9 @@ enum class FnWindowType : std::uint8_t {
 struct FnWindow {
     virtual ~FnWindow() = default;
     virtual void init(FnWindowType type, std::string title, int width, int height) = 0;
-    virtual void run() = 0;
     virtual void unInit() = 0;
+    virtual void addLayer(std::shared_ptr<FnWindowLayer> windowLayer) = 0;
+    virtual void run() = 0;
 };
 
 #endif  // FNWINDOW_H

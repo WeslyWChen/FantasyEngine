@@ -5,10 +5,21 @@
 #ifndef FNGLRENDER_H
 #define FNGLRENDER_H
 
-#include "FnGlRenderApi.h"
+#include "FnPainter.h"
 
-class FNGLRENDER_API FnGlRender {
+class FnGlRender final : public FnPainter {
+public:
+    FnGlRender() = default;
+    ~FnGlRender() override = default;
+    FnGlRender(const FnGlRender&) = delete;
+    FnGlRender& operator==(const FnGlRender&) = delete;
+    FnGlRender(FnGlRender&&) = delete;
+    FnGlRender& operator==(FnGlRender&&) = delete;
 
+public:
+    void clear() override;
+
+public:
 };
 
 #endif  // FNGLRENDER_H

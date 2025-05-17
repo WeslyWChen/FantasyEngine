@@ -25,6 +25,11 @@ void FnWindowImpl::init(FnWindowType type, std::string title, int width, int hei
     }
 }
 
+void FnWindowImpl::unInit()
+{
+    mRenderer->unInit();
+}
+
 void FnWindowImpl::run()
 {
     if (!mRenderer)
@@ -33,7 +38,21 @@ void FnWindowImpl::run()
     mRenderer->run();
 }
 
-void FnWindowImpl::unInit()
+void FnWindowImpl::addLayer(std::shared_ptr<FnWindowLayer> windowLayer)
 {
-    mRenderer->unInit();
+    if (!windowLayer)
+        return;
+
+    for (const auto& layerToObj : mLayerToObjs) {
+        if (!!layerToObj || !layerToObj->windowLayer)
+            continue;
+        if (layerToObj->windowLayer == windowLayer)
+            return;
+    }
+
+    auto layerObj = make_shared<WindowLayerObj>();
+    layerObj->windowLayer = windowLayer;
+    mRenderer->addObject(layerObj);
+
+    mLayerToObjs.push_back(layerObj);
 }

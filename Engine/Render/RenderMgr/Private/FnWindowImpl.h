@@ -6,6 +6,7 @@
 #define FNWINDOWIMPL_H
 
 #include <memory>
+#include <vector>
 
 #include "FnRenderer.h"
 #include "FnWindow.h"
@@ -21,11 +22,24 @@ public:
 
 public:
     void init(FnWindowType type, std::string title, int width, int height) override;
-    void run() override;
     void unInit() override;
+    void run() override;
+    void addLayer(std::shared_ptr<FnWindowLayer> windowLayer) override;
 
 private:
     std::shared_ptr<FnRenderer> mRenderer = nullptr;
+
+private:
+    struct WindowLayerObj final : public FnRenderObject {
+        std::shared_ptr<FnWindowLayer> windowLayer = nullptr;
+        void draw(std::shared_ptr<FnPainter> painter) override
+        {
+            if (!windowLayer)
+                return;
+            windowLayer->draw(painter);
+        }
+    };
+    std::vector<std::shared_ptr<WindowLayerObj>> mLayerToObjs;
 };
 
 #endif  // FNWINDOWIMPL_H

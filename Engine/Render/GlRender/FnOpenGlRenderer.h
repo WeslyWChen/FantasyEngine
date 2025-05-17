@@ -6,6 +6,7 @@
 #define FNOPENGLRENDERER_H
 
 #include <string>
+#include <vector>
 
 #include "FnGlRenderApi.h"
 #include "FnRenderer.h"
@@ -19,15 +20,24 @@ public:
     FnOpenGlRenderer(FnOpenGlRenderer&&) = delete;
     FnOpenGlRenderer& operator=(FnOpenGlRenderer&&) = delete;
 
-public:
+public:  // FnRenderer
     void init() override;
-    void run() override;
     void unInit() override;
+    void run() override;
+    void addObject(std::shared_ptr<FnRenderObject> object) override;
+
+private:
+    void inputHandle();
+    void drawHandle();
 
 public:
     std::string mTitle {};
     int mWidth {};
     int mHeight {};
+
+private:
+    struct Impl;
+    std::shared_ptr<Impl> mImpl = nullptr;
 };
 
 #endif  // FNOPENGLRENDERER_H

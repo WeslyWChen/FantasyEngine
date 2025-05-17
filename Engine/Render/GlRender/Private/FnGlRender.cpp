@@ -3,3 +3,12 @@
 //
 
 #include "FnGlRender.h"
+
+#include "glad/glad.h"
+
+using namespace std;
+
+void FnGlRender::clear()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+}

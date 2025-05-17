@@ -36,5 +36,6 @@ FnModuleMgr::~FnModuleMgr()
 
 void FnModuleMgr::registerModule(std::shared_ptr<FnModule> module)
 {
+    module->init();
     mImpl->modules.push(std::move(module));
 }
