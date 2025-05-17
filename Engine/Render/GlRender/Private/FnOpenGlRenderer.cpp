@@ -48,10 +48,12 @@ void FnOpenGlRenderer::run()
     glViewport(0, 0, mWidth, mHeight);
 
     while (!glfwWindowShouldClose(window)) {
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
         // input handle
         inputHandle();
+
+        // clear back buffer
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         // draw handle
         drawHandle();
