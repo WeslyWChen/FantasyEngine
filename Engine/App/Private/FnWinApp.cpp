@@ -28,6 +28,12 @@ void FnWinApp::onRun()
         return;
 
     window->init(FnWindowType::WINDOW_TYPE_OPENGL, mTitle, mWidth, mHeight);
+    onPreRun(window);
     window->run();
+    onPostRun(window);
     window->unInit();
 }
+
+void FnWinApp::onPreRun(std::shared_ptr<FnWindow> window) {}
+
+void FnWinApp::onPostRun(std::shared_ptr<FnWindow> window) {}

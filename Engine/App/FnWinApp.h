@@ -6,9 +6,9 @@
 #define FNWINAPP_H
 
 #include "FnApp.h"
+#include "FnWindow.h"
 
-class FNAPP_API FnWinApp : public FnApp
-{
+class FNAPP_API FnWinApp : public FnApp {
 public:
     FnWinApp(int argc, char** argv);
     ~FnWinApp() override = default;
@@ -23,6 +23,10 @@ public:
 
 protected:
     void onRun() override;
+
+protected:
+    virtual void onPreRun(std::shared_ptr<FnWindow> window);
+    virtual void onPostRun(std::shared_ptr<FnWindow> window);
 
 private:
     std::string mTitle = "FnWinApp";
